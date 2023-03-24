@@ -1,0 +1,62 @@
+class Menu:
+  def __init__(self, menu, customer):
+    self.menu = menu
+    self.customer = customer
+    self.add = []
+    self.remove = []
+    self.final = []
+
+  def add_food_items(self, add):
+    self.add = add
+    print(f"You have added {self.add}")
+
+  def remove_food_items(self, rem):
+    self.remove = rem
+    for item in self.add:
+      if item not in self.remove:
+        self.final.append(item)
+
+  def show_menu(self):
+    print(f"Dear {self.customer.name},\nThe menu you selected contains the following items:")
+    for k, v in menu_dict.items():
+      if k == self.menu:
+        for values in v:
+          print(values)
+
+  def order_confirm(self):
+    print(f"Thank You For Your Order, {self.customer.name}")
+    print("You have ordered:")
+    if order_confirmed != "Confirmed":
+      for i in self.final:
+        print(i)
+    else:
+      for i in self.add:
+        print(i)
+
+
+class Customer:
+  def __init__(self, name):
+    self.name = name
+    print(f"Dear {self.name} !!!")
+    print(f"Welcome To Khida Lagse!!!")
+
+
+menu_dict = {
+  "Beef Steaks": ['Beef Ribs Steak', 'Beef Jaw Steak', 'Beef Regular Steak', 'Drinks'],
+  "Mughal Rice": ['Special Kacchi', 'Kabuli Pulaw', 'Special Beef Biriyani', 'Drinks'],
+  "Traditional Special": ["Mezban Gosh", "Kala Bhuna", "Chui Gosh"]
+}
+
+customer_name = input("Enter Customer Name: ")
+customer = Customer(customer_name)
+print(f"Our Menu: {menu_dict}")
+selected_menu = input("Enter any one menu: ")
+menu = Menu(selected_menu, customer)
+menu.show_menu()
+items_to_add = eval(input("Enter food items from the menu you selected: "))
+menu.add_food_items(items_to_add)
+order_confirmed = input("Do you confirm your order? ")
+if order_confirmed != "Confirmed":
+  items_to_remove = eval(input("Enter items to remove from your cart: "))
+  menu.remove_food_items(items_to_remove)
+menu.order_confirm()
